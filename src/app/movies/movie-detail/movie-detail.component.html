@@ -1,0 +1,31 @@
+<div class="movie-card">
+  <div class="row">
+    <div class="movie-card-poster col-md-3">
+      <img src="{{movie.poster}}"/>
+    </div>
+    <div class="movie-card-infos col-md-9">
+      <h4>{{movie.title | uppercase}}</h4>
+      <ul>
+        <li>
+          <span class="title">Réalisateur(s) : </span>
+          <span *ngFor="let director of movie.directors;last as isLast">{{director}}<span *ngIf="!isLast">, </span></span>
+        </li>
+        <li>
+          <span class="title">Acteur(s) : </span>
+          <span *ngFor="let actor of movie.actors;last as isLast">{{actor}}<span *ngIf="!isLast">, </span></span>
+        </li>
+        <li>
+          <span class="title">Genre(s) : </span>
+          <span *ngFor="let genre of movie.genres;last as isLast">{{genre}}{{isLast?'':', '}} </span>
+        </li>
+        <li *ngIf="movie.synopsis">
+          <span class="title">Synopsis</span><br/>
+          <p class="synopsis">{{movie.synopsis}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" routerLink="/movie/{{movie.id}}/edit">Edit</button>
+
+</div>

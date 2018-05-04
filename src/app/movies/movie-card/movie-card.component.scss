@@ -1,0 +1,22 @@
+.movie-card-poster {
+  max-width: 135px;
+  margin-top: 12px;
+}
+img {
+  width: 120px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.title {
+  font-weight: bold;
+}
+.synopsis {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.movie-card {
+  padding: 5px;
+}
