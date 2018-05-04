@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from '../../movie';
-import {MOVIES} from '../../../assets/movies.data';
 import {DIRECTORS} from '../../../assets/directors.data';
 import {GENRES} from '../../../assets/genres.data';
 import {ACTORS} from '../../../assets/actors.data';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MovieService} from '../../shared/services/movie.service';
+import {GenreService} from '../../shared/services/genre.service';
+import {ActorService} from '../../shared/services/actor.service';
+import {DirectorService} from '../../shared/services/director.service';
+import {Director} from '../../director';
+import {Genre} from '../../genre';
+import {Actor} from '../../actor';
 
 @Component({
   selector: 'app-movie-edit',
@@ -12,34 +18,49 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./movie-edit.component.scss']
 })
 export class MovieEditComponent implements OnInit {
-  public model: Movie = MOVIES[0];
+  public movie: Movie;
   public submitted: boolean;
 
-  public directorsList = DIRECTORS;
-  public genresList = GENRES;
-  public actorsList = ACTORS;
+  public directorsList: Director[];
+  public genresList: Genre[];
+  public actorsList: Actor[];
 
-  constructor(public route: ActivatedRoute) {
-
+  constructor(public route: ActivatedRoute, public router: Router, public movieService: MovieService, public genreService: GenreService, public actorService: ActorService, public directorService: DirectorService) {
     this.submitted = false;
   }
 
+
+  newMovie() {
+    this.route.paramMap.subscribe(
+      params => {
+        const id = params.get('id');
+        if (id) {
+          this.movieService.getById(+id).subscribe(data => this.movie = data);
+        }else{
+          this.movie = new Movie(120,'','',[],[],[]);
+        }
+      });
+  }
+
   onSubmit() {
-    this.submitted = true;
+    this.movieService.update(this.movie).subscribe(
+      () => { this.router.navigate(['/movie/' + this.movie.id]);
+      });
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(
       params => {
         const id = params.get('id');
-        this.model = MOVIES[id];
+        this.movieService.getById(+id).subscribe(data => this.movie = data);
+
       });
+
+    this.genreService.getAll().subscribe(data => this.genresList = data);
+    this.actorService.getAll().subscribe(data => this.actorsList = data);
+    this.directorService.getAll().subscribe(data => this.directorsList = data);
   }
 
-  get diagnostic(){return JSON.stringify(this.model)}
-
-  newMovie() {   this.model = new Movie(0,'','',[],[],[],'') }
-
-
+  get diagnostic(){return JSON.stringify(this.movie)}
 
 }

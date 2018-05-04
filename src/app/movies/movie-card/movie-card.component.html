@@ -1,4 +1,4 @@
-<div class="movie-card">
+<div class="movie-card" *ngIf="movie">
   <div class="row">
     <div class="movie-card-poster col-md-3">
       <img routerLink="/movie/{{movie.id}}" src="{{movie.poster}}"/>

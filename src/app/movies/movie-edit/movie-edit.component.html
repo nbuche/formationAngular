@@ -1,11 +1,11 @@
-<div class="container">
-  <div [hidden]="submitted">>
+<div class="container" *ngIf="movie">
+  <div [hidden]="submitted" >
     <h1>Movie Form</h1>
-    <form #movieForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #movieForm="ngForm" (ngSubmit)="onSubmit();">
       {{diagnostic}}
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" required minlength="4" [(ngModel)]="model.title"  name="title" #title="ngModel">
+        <input type="text" class="form-control" id="title" required minlength="4" [(ngModel)]="movie.title"  name="title" #title="ngModel">
         <div [hidden]="!title.errors?.required" class="alert alert-danger">Le titre est requis</div>
         <div [hidden]="!title.errors?.minlength" class="alert alert-danger">Le titre doit faire au moins 4 caractères</div>
       </div>
@@ -13,28 +13,28 @@
 
       <div class="form-group">
         <label for="directors">Directors</label>
-        <select class="form-control" id="directors" required multiple [(ngModel)]="model.directors" name="directors" #directors="ngModel">
+        <select class="form-control" id="directors" required multiple [(ngModel)]="movie.directors" name="directors" #directors="ngModel">
           <option *ngFor="let director of directorsList" [value]="director">{{director}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="actors">Actors</label>
-        <select class="form-control" id="actors" required multiple [(ngModel)]="model.actors" name="actors" >
+        <select class="form-control" id="actors" required multiple [(ngModel)]="movie.actors" name="actors" >
           <option *ngFor="let actor of actorsList" [value]="actor">{{actor}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="genres">Genres</label>
-        <select class="form-control" id="genres" required multiple [(ngModel)]="model.genres" name="genres" >
+        <select class="form-control" id="genres" required multiple [(ngModel)]="movie.genres" name="genres" >
           <option *ngFor="let genre of genresList" [value]="genre">{{genre}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="synopsis">Synopsis</label>
-        <input type="text" class="form-control" id="synopsis" required maxlength="250" [(ngModel)]="model.synopsis"  name="synopsis" #synopsis="ngModel">
+        <input type="text" class="form-control" id="synopsis" required maxlength="250" [(ngModel)]="movie.synopsis"  name="synopsis" #synopsis="ngModel">
         <div [hidden]="!synopsis.errors?.maxlength" class="alert alert-danger">Le synopsis doit faire moins de 250 caractères</div>
       </div>
 
@@ -49,23 +49,23 @@
     <h2>Informations</h2>
     <div class="row">
       <div class="col-md-3">Title</div>
-      <div class="col-md-9  pull-left">{{ model.title }}</div>
+      <div class="col-md-9  pull-left">{{ movie.title }}</div>
     </div>
     <div class="row">
       <div class="col-md-3">Directors</div>
-      <div class="col-md-9 pull-left">{{ model.directors }}</div>
+      <div class="col-md-9 pull-left">{{ movie.directors }}</div>
     </div>
     <div class="row">
       <div class="col-md-3">Actors</div>
-      <div class="col-md-9 pull-left">{{ model.actors }}</div>
+      <div class="col-md-9 pull-left">{{ movie.actors }}</div>
     </div>
     <div class="row">
       <div class="col-md-3">Genres</div>
-      <div class="col-md-9 pull-left">{{ model.genres }}</div>
+      <div class="col-md-9 pull-left">{{ movie.genres }}</div>
     </div>
     <div class="row">
       <div class="col-md-3">Synopsis</div>
-      <div class="col-md-9 pull-left">{{ model.synopsis }}</div>
+      <div class="col-md-9 pull-left">{{ movie.synopsis }}</div>
     </div>
     <br>
     <button class="btn btn-primary" (click)="submitted=false"> Edit</button>

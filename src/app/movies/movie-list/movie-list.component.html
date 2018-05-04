@@ -4,15 +4,21 @@
       {{genre}}
     </a>
   </nav-->
+  <div class=‘container-ﬂuid’>
+    <app-movie-search></app-movie-search>
 
-  <ul class="nav nav-pills">
-    <li *ngFor="let genre of genresList" class="nav-item" >
-      <a class="nav-link" routerLink="/movies" routerLinkActive="active" [queryParams]="{genre:genre}">{{genre}}</a></li>
+    <ul class="nav nav-pills">
+      <li *ngFor="let genre of genresList" class="nav-item" >
+        <a class="nav-link" routerLink="/movies" routerLinkActive="active" [queryParams]="{genres:genre}">{{genre}}</a>
+      </li>
   </ul>
+
 
 
   <div *ngFor="let film of movies">
     <app-movie-card [movie]="film"></app-movie-card>
+  </div>
+
   </div>
 
   <div *ngIf="!movies || movies.length === 0">

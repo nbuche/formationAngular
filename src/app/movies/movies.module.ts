@@ -7,6 +7,7 @@ import {MovieCardComponent} from './movie-card/movie-card.component';
 import {MovieEditComponent} from './movie-edit/movie-edit.component';
 import {SharedModule} from '../shared/shared.module';
 import {MoviesRoutingModule} from './movies-routing.module';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
 
 
 
@@ -21,7 +22,8 @@ import {MoviesRoutingModule} from './movies-routing.module';
     MovieListComponent,
     MovieDetailComponent,
     MovieCardComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    MovieSearchComponent
   ],
   providers: [
 
